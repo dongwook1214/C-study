@@ -1,40 +1,24 @@
 #include<stdio.h>
 
 int main(){
-	
-	int num;
-	int scorenum;
-	float percent[100] = {0};
-	double average = 0;
-	int i;
-	int j;
-	int scorelist[1000][100];
+	int num,i,j,sum,num2,score;
+	int scorelist[5000];
 	
 	scanf("%d",&num);
-	
 	for (i = 0; i < num; i++){
-		
-		average = 0;
-		scanf("%d",&scorenum);
-		
-		for(j = 0; j < scorenum; j++){
-			scanf("%d",&scorelist[i][j]);
-			average += scorelist[i][j];
+		sum = 0;
+		score = 0;
+		scanf("%d",&num2);
+		for(j = 0; j < num2; j++){
+			scanf("%d",&scorelist[j]);
+			sum += scorelist[j];
 		}
-		
-		average = average / (double)scorenum;
-		
-		for(j = 0; j < scorenum ; j++){
-			
-			if(scorelist[i][j] > average){
-				percent[i] += (double)100/(double)scorenum;
+		for(j = 0; j < num2; j++){
+			if(scorelist[j] > (double)sum / (double)num2){
+				score++;
 			}
 		}
-				
-	}
-	
-	for (i = 0; i < num; i++){
-		printf("%.3lf%%\n",percent[i]);
+		printf("%.3f%%\n",(double)score / (double)num2 *100);
 	}
 	
 	return 0;
