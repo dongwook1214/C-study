@@ -34,5 +34,9 @@ int main(){
     printf("%c\n",*(&c[0]+1));
     //int의 크기는 4byte라서 4 이동하면 다음 정수의 주소
     printf("%x\n%x\n%x\n%x\n",&d[0],&d[1],&d[2],&d[3]);
+    
+    printf("_____________\n");
+    
+    printf("%x",&c[0]);
 
 }
