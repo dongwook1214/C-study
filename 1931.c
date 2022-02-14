@@ -1,45 +1,34 @@
 #include<stdio.h>
 
 int main(){
-    int num, i,k,j,f,c,score = 1;
-    int a[100000];
-    int b[100000];
+    int a[100000]={0},b[100000]={0};
+    int num,i,j,t,f;
+    int score = 1;
 
     scanf("%d",&num);
-
-    scanf("%d %d",&a[0],&b[0]);
-    c = a[0];//a 최대
-    k = b[0];//b 최소
-    f = b[0];//b 최대
-    for(i = 1; i < num; i++){
+    for(i = 0; i < num; i++){
         scanf("%d %d",&a[i],&b[i]);
-        if(b[i]<k){
-            k = b[i];
-        }
-        if(b[i]>f){
-            f = b[i];
-        }
-        if(c<a[i]){
-            c = a[i];
+    }
+
+    for(i = 0; i < num -1; i++){
+        for(j = 0; (i + j) < num - 1; j++){
+            if(b[j]>b[j+1]){
+                t = b[j];
+                b[j] = b[j+1];
+                b[j+1] = t;
+                t = a[j];
+                a[j] = a[j+1];
+                a[j+1] = t;
+            }
         }
     }
 
-    while(1){
-        j = f;
-        for(i = 0; i < num; i++){
-            if(a[i]<k){
-                continue; 
-            }
-            if(j>=b[i]){
-                j=b[i];
-            }
+    f = b[0];
+    for(i = 1; i < num; i++){
+        if(a[i]>=f){
+            score++;
+            f = b[i];
         }
-        score++;
-        k = j;
-        if(k > c){
-            break;
-        }
-        
     }
     printf("%d",score);
 
