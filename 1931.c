@@ -2,7 +2,7 @@
 
 int main(){
     int a[100000]={0},b[100000]={0};
-    int num,i,j,t,f,gap;
+    int num,i,j,temp,f,gap;
     int score = 1;
 
     scanf("%d",&num);
@@ -11,18 +11,52 @@ int main(){
     }
     gap = num/2;
 
-    for(i = 0; i < num -1; i++){
-        for(j = i+1; j < num ; j++){
-            if(b[i]>b[j]){
-                t = b[i];
-                b[i] = b[j];
-                b[j] = t;
-                t = a[i];
-                a[i] = a[j];
-                a[j] = t;
+    while (gap>0)
+    {
+        for(i = gap; i < num; i++){
+            j = i-gap;
+            while(j>=0){
+                if(a[j]>a[j+gap]){
+                    temp = b[j];
+                    b[j]=b[j+gap];
+                    b[j+gap] = temp;
+                    temp = a[j];
+                    a[j]=a[j+gap];
+                    a[j+gap] = temp;
+                    j-=gap;
+
+                }else{
+                    j=-1;
+                }
             }
         }
+        gap/=2;
     }
+
+    gap = num/2;
+
+    while (gap>0)
+    {
+        for(i = gap; i < num; i++){
+            j = i-gap;
+            while(j>=0){
+                if(b[j]>b[j+gap]){
+                    temp = b[j];
+                    b[j]=b[j+gap];
+                    b[j+gap] = temp;
+                    temp = a[j];
+                    a[j]=a[j+gap];
+                    a[j+gap] = temp;
+                    j-=gap;
+
+                }else{
+                    j=-1;
+                }
+            }
+        }
+        gap/=2;
+    }
+    
 
     f = b[0];
     for(i = 1; i < num; i++){
