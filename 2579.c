@@ -1,37 +1,30 @@
 #include<stdio.h>
 
 int main(){
-    int dp[300];
-    int num,i,t,score;
+    int arr[301]={0};
+    int dp[301][2];
+    int num,i,t =1,a;
     scanf("%d",&num);
-    for(i = 0; i < num; i++){
-        scanf("%d",&dp[i]);
+    for(i = 1;i <= num; i++){
+        scanf("%d",&arr[i]);
     }
-    t = 1;
-    score = dp[num -1];
-    i = num-1;
-    while(i >= 2){
-        if(i == 3){
-            score = score + dp[0]+dp[1];
-            break;
-        }
-        if(t<=1){
-            if(dp[i-1]>dp[i-2]){
-            score += dp[i-1];
-            t += 1;
-            i--;
-            }else{
-                score += dp[i-2];
-                t = 0;;
-                i -= 2;
-            }
+    dp[1][0]=arr[1];
+    dp[1][1]=arr[1];
+    dp[2][0]=arr[2]+arr[1];
+    dp[2][1]=arr[2];
+
+    for(i = 3; i <= num; i++){
+        dp[i][0] = arr[i] + dp[i-1][1];
+        if(dp[i-2][0]>dp[i-2][1]){
+            dp[i][1] = arr[i]+dp[i-2][0];
         }else{
-            score += dp[i-2];
-            t = 0;;
-            i -= 2;
+            dp[i][1] = arr[i]+dp[i-2][1];
         }
     }
-    
-    printf("%d",score);
-    
+    if(dp[num][0]>dp[num][1]){
+        a = dp[num][0];
+    }else{
+        a = dp[num][1];
+    }
+    printf("%d",a);
 }
