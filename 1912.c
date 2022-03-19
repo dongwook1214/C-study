@@ -1,33 +1,24 @@
 #include<stdio.h>
+int dp[100000];
+int arr[100000];
 
 int main(){
     int num,i,score,j,max;
     scanf("%d",&num);
-    int dp[100000]={0,};
-    int arr[100000];
     for(i = 0; i < num; i++){
         scanf("%d",&arr[i]);
     }
-    for(i = 0; i < num; i++){
-        score = 0;
-        for(j = i; j < num; j++){
-            if(arr[i] < 0){
-                dp[i] = arr[i];
-                break;
-            }
-            if(score+arr[i]>0){
-                score += arr[j];
-                if(score>dp[i]){
-                    dp[i] = score;
-                }
-            }else{
-                break;
-            }
+    dp[0] = arr[0];
+    for(i = 1; i < num; i++){
+        if(dp[i-1]+arr[i]>arr[i]){
+            dp[i] = dp[i-1]+arr[i];
+        }else{
+            dp[i] = arr[i];
         }
     }
     max = dp[0];
     for(i = 1; i < num; i++){
-        if(max < dp[i]){
+        if(max<dp[i]){
             max = dp[i];
         }
     }
