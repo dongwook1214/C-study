@@ -7,26 +7,20 @@ int max(int a, int b){
 int main(void){
  
     int N;
-    int wine[10010] = {};
-    int Dp[10010] = {};
+    int arr[10010] = {};
+    int dp[10010] = {};
     scanf("%d", &N);
  
     for (int i = 1; i <= N; i++)
-        scanf("%d", &wine[i]);
+        scanf("%d", &arr[i]);
  
-    for (int i = 1; i < 3 && i <= N; i++){
-        if (i == 1)
-            Dp[i] = wine[i];
-        else
-            Dp[i] = wine[i] + wine[i - 1];
-    }
- 
+    dp[1] = arr[1];
+    dp[2] = arr[1]+arr[2];
+
     for (int i = 3; i <= N; i++){
-        int result = 0;
-        result = max(wine[i] + Dp[i - 2], Dp[i - 1]);
-        result = max(result, wine[i] + wine[i - 1] + Dp[i - 3]);
-        Dp[i] = result;
+        dp[i] = max(arr[i] + dp[i - 2], dp[i - 1]);
+        dp[i] = max(dp[i], arr[i] + arr[i - 1] + dp[i - 3]);
     }
     
-    printf("%d\n", Dp[N]);
+    printf("%d\n", dp[N]);
 }
